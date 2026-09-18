@@ -27,7 +27,9 @@ def toggle_drum_beat(drum_type, location, current_dictionary):
         current_dictionary[drum_type][location] = False
 
 root = tk.Tk()
-root.title("Drum thingmabob")
+root.title("drum thingmabob")
+app_icon = tk.PhotoImage(file="assets/misc/icon.png")
+root.iconphoto(True, app_icon)
 windll.shcore.SetProcessDpiAwareness(1)
 
 frm_instruments = ttk.Frame(root, padding=10)
@@ -107,18 +109,15 @@ def get_bpm():
             raise ValueError
         return bpm
     except:
-        tk.messagebox.showerror("Invalid BPM", "Please enter a valid BPM between 20 and 300.")
+        tk.messagebox.showerror("Invalid BPM", "are you sure you want THAT as your bpm???????")
         return None
 
 
-playback = False
-def set_playback_false():
-    playback = False
 
 frm_buttons = ttk.Frame(root, padding=10)
 frm_buttons.grid(column=1, row=1)
 play_button = tk.Button(frm_buttons, text="play", command= lambda: [start_playback(get_bpm(), current_instrument_dictionary, sounds)]).grid(column=0, row=0)
-stop_button = tk.Button(frm_buttons, text="stop", command= lambda: set_playback_false(playback)).grid(column=0, row=1)
+stop_button = tk.Button(frm_buttons, text="stop", state="disabled").grid(column=0, row=1)
 clear_button = tk.Button(frm_buttons, text="clear", command= lambda: clear_all(current_instrument_dictionary, tk_variable_list_to_stop_bad_behaviour)).grid(column=0, row=3)
 
 
